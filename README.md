@@ -10,7 +10,7 @@ Please take care the webhook authentication to avoid abused from attach.
 
 Prometheus alert rule example.
 
-<code>
+```erb
 ALERT NGINX_LOAD_HIGH
   IF sum(rate(nginx_connections_processed_total[1m]) )  / ((count(nginx_connections_processed_total {stage="handled"}) -1 ) * 200) > 1
   FOR 1m
@@ -29,14 +29,13 @@ ALERT NGINX_LOAD_LOW
     description = "{\"rc\":\"nginx-test-rc\", \"ns\":\"default\", \"min\":2, \"max\":10, \"scale\":\"down\"}",
   }
 
-</code>
-
+```
 
 Alertmanager
 
 Add the webhook receiver in alertmanager setting
 
-<code>
+```yaml
   routes:
      ...
   - match:
@@ -50,9 +49,7 @@ receivers:
   webhook_configs:
   - url: 'http://k8s-webhook-svc/webhooks/prom'
     send_resolved: true
-</code>
-
-
+```
 
 Ref: 
 
