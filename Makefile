@@ -1,4 +1,4 @@
-TAG=v1.0
+TAG=v1.3
 NAME=scale_webhook
 USER=kaija
 API_HOST=1.2.3.4

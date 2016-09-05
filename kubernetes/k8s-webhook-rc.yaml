@@ -14,15 +14,13 @@ spec:
         name: k8s-webhook
     spec:
       containers:
-      - image: kaija/k8s-webhook
+      - image: kaija/scale_webhook:v1.1
         name: k8s-webhook
         env:
         - name: PORT
-          value: 80
-        - name: KUBERNETES_SERVICE_HOST
-          value: 1.2.3.4
+          value: '80'
         - name: KUBERNETES_API_TOKEN
-          value: xxxxxxxxxxxxxxxxx
+          value: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
         ports:
         - containerPort: 80
           name: webhook-port

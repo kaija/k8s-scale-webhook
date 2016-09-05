@@ -61,6 +61,10 @@ function scale(msg, cb) {
       var replica = data.spec.replicas;
       if (scale == 'up') {
         replica ++;
+        if (replica > max) {
+          cb(null, "reach max pod count");
+          return;
+        }
         k8s.ns(ns).rc.patch({
           name: rc,
           body: { spec: { replicas: replica } }
@@ -71,7 +75,8 @@ function scale(msg, cb) {
       } else if(scale == 'down'){
         replica --;
         if (replica < min) {
-          replica = min;
+          cb(null, "reach min pod count");
+          return;
         }
         k8s.ns(ns).rc.patch({
           name: rc,
