@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    name: k8s-webhook
+  name: k8s-webhook-rc
+spec:
+  replicas: 1
+  selector:
+    name: k8s-webhook
+  template:
+    metadata:
+      labels:
+        name: k8s-webhook
+    spec:
+      containers:
+      - image: kaija/k8s-webhook
+        name: k8s-webhook
+        env:
+        - name: PORT
+          value: 80
+        - name: KUBERNETES_SERVICE_HOST
+          value: 1.2.3.4
+        - name: KUBERNETES_API_TOKEN
+          value: xxxxxxxxxxxxxxxxx
+        ports:
+        - containerPort: 80
+          name: webhook-port
+          protocol: TCP
